@@ -5,24 +5,20 @@ from typing import List
 
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        memo = ['U']*len(nums)
-        def canJumpFromPosition(position, nums):
-            if memo[position] != 'U':
-                return memo[position] == 'G'
+        memo = ['U']*(len(nums) - 1)
+        memo.append('G')
 
-            furthestJump = min(position + nums[position], len(nums) - 1)
-            
-            for nextPosition in reversed(range(position + 1, furthestJump + 1)):
-                if canJumpFromPosition(nextPosition, nums):
-                    memo[position] = 'G'
-                    return True
+        for i in range(len(nums) - 2, -1, -1):
+            furthestJump = min(i + nums[i], len(nums) - 1)
+            for j in range(i + 1, furthestJump + 1):
+                if memo[j] == 'G':
+                    memo[i] = 'G'
+                    break
 
-            memo[position] = 'B'
-            return False
-
-        memo[len(nums) - 1] = 'G'
-        return  canJumpFromPosition(0, nums)
+        return  memo[0] == 'G'
 
 nums = [2,3,1,1,4]
+nums = [1,2]
+nums = [0,2,3]
 obj = Solution()
 print(obj.canJump(nums))
