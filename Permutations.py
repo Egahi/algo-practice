@@ -1,5 +1,5 @@
 '''
-https://leetcode.com/explore/interview/card/top-interview-questions-medium/109/backtracking/795/
+https://leetcode.com/problems/permutations
 '''
 from typing import List
 
@@ -11,7 +11,7 @@ class Solution:
 
             for i in range(first, n):
                 nums[first], nums[i] = nums[i], nums[first]
-                backtrack(i + 1)
+                backtrack(first + 1)
                 nums[first], nums[i] = nums[i], nums[first]
 
         output = []
