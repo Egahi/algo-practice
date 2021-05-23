@@ -24,7 +24,6 @@ class Solution:
 
         output = sign * int(output)
 
-
         if output < LOWER:
             output = LOWER
 
